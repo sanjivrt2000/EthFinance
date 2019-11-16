@@ -1,0 +1,128 @@
+pragma solidity ^0.4.17;
+
+contract FinappFactory{
+    address[] public deployedFinAddr;
+    address[] public finaddress;
+    address[] public deployedPerAddr;
+
+    struct deployedaddrstruct {
+        address deployedaddress;
+        bool isEntity;
+    }
+
+    string public err;
+    mapping (address => deployedaddrstruct) public deployedAddress;
+
+   function createNewInstance(int p_inst_type) public {
+      if(isEntity(msg.sender))
+      {
+        revert('A deployed instance already exists with requested account address!');
+      }
+      else {
+        address newInstance = address(new Finapp(msg.sender));
+        if (p_inst_type == 1) {
+        deployedFinAddr.push(newInstance);
+        finaddress.push(msg.sender);
+        deployedAddress[msg.sender].deployedaddress = newInstance;
+        deployedAddress[msg.sender].isEntity = true;
+        }
+     else if (p_inst_type == 2) {
+        deployedPerAddr.push(newInstance);
+        deployedAddress[msg.sender].deployedaddress = newInstance;
+        deployedAddress[msg.sender].isEntity = true;
+      }
+      else {
+          err = "Needs exceptional handling";
+      }
+      }
+   }
+
+   function isEntity(address entityAddress) public view returns(bool isIndeed) {
+       return deployedAddress[entityAddress].isEntity;
+    }
+
+    function GetFinAddress() view public returns(address[] memory){
+        return finaddress;
+    }
+}
+
+contract Finapp {
+    struct fininfoStruct{
+        string fullname;
+        string location;
+        string doe;
+        int256 regno;
+        bool isEntity;
+    }
+
+     struct clientinfoStruct{
+        string firstname;
+        string lastname;
+        string location;
+        string dob;
+        int256 regno;
+        string fathername;
+        bool isEntity;
+    }
+
+    address public _entityaddress;
+    address public accountmanager;
+    mapping (address => fininfoStruct) public fininfoStructs;
+    mapping (address => clientinfoStruct) public clientinfoStructs;
+    address[] public registeredFinances;
+    address[] public registeredClients;
+
+
+    constructor(address _parameter) public {
+        accountmanager = _parameter;
+        _entityaddress = _parameter;
+    }
+
+    modifier restricted() {
+       require(msg.sender == accountmanager);
+       _;
+    }
+
+    function setFinDetails(string memory _fullname, string memory _location, string memory _doe, int256 _regno) public restricted() returns(bool success) {
+    if(isFinEntity(msg.sender))
+      {
+        revert('You are already registered!');
+      }
+      else {
+        fininfoStructs[_entityaddress].fullname = _fullname;
+        fininfoStructs[_entityaddress].location = _location;
+        fininfoStructs[_entityaddress].doe = _doe;
+        fininfoStructs[_entityaddress].regno = _regno;
+        fininfoStructs[_entityaddress].isEntity = true;
+        registeredFinances.push(_entityaddress);
+        return true;
+      }
+    }
+
+    function setClientDetails(string memory _firstname,string memory _lastname, string memory _location, string memory _dob, int256 _regno, string memory _fathername) public restricted() returns(bool success) {
+    if(isClientEntity(msg.sender))
+      {
+        revert('You are already registered!');
+      }
+      else {
+        clientinfoStructs[_entityaddress].firstname = _firstname;
+        clientinfoStructs[_entityaddress].lastname = _lastname;
+        clientinfoStructs[_entityaddress].location = _location;
+        clientinfoStructs[_entityaddress].dob = _dob;
+        clientinfoStructs[_entityaddress].regno = _regno;
+        clientinfoStructs[_entityaddress].fathername = _fathername;
+        clientinfoStructs[_entityaddress].isEntity = true;
+        registeredClients.push(_entityaddress);
+        return true;
+      }
+    }
+
+    function isFinEntity(address _entityAddress) public view returns(bool isIndeed) {
+       return fininfoStructs[_entityAddress].isEntity;
+    }
+
+    function isClientEntity(address _entityAddress) public view returns(bool isIndeed) {
+       return clientinfoStructs[_entityAddress].isEntity;
+    }
+
+}

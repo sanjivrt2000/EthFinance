@@ -1,0 +1,26 @@
+--20190916 11:37--
+PS D:\sanjivfolder\projects\ethFinance\ethereum> node .\deploy.js
+Attempting to deploy from account 0xD9cdaEA0dC40ECFE8D87D633a1daE6e99BF37820
+Contract deployed to 0x9af10Fc1e5e1D8DDD4F9Df1A6e5C94Db8dD95b8b
+
+-- 20190919 12:20 AM --
+PS D:\sanjivfolder\projects\ethFinance\ethereum> node .\deploy.js
+Attempting to deploy from account 0xD9cdaEA0dC40ECFE8D87D633a1daE6e99BF37820
+Contract deployed to 0xeB36BCFDAa8ba7b0BF5E92f4A955e5428B34D2d7
+
+-- 20190922 08:17PM --
+PS D:\sanjivfolder\projects\ethFinance\ethereum> node .\deploy.js
+Attempting to deploy from account 0xD9cdaEA0dC40ECFE8D87D633a1daE6e99BF37820
+Contract deployed to 0xaFc370e982886849f5282b0B308C177b7E00f674
+
+
+-- 20190925 10:12PM --
+PS D:\sanjivfolder\projects\ethFinance\ethereum> node .\deploy.js
+Attempting to deploy from account 0xD9cdaEA0dC40ECFE8D87D633a1daE6e99BF37820
+Contract deployed to 0xC614701950587B2E08b5cadD3eb5739F15F5f9e6
+
+
+-- 20191014 10:09PM --
+PS D:\sanjivfolder\projects\ethFinance\ethereum> node .\deploy.js
+Attempting to deploy from account 0xD9cdaEA0dC40ECFE8D87D633a1daE6e99BF37820
+Contract deployed to 0x1109A77035D054D619Ae72B36228D5451F391D81
