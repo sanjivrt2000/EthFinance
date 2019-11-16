@@ -2,7 +2,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const compiledFactory = require('./build/FinappFactory.json');
 const provider = new HDWalletProvider(
-  'width any goose asthma orchard glimpse comfort rotate letter fury medal learn', 'https://rinkeby.infura.io/v3/d1d56533f438474f9642a893faec90c0'
+  '--input your account phrase words--', 'https://rinkeby.infura.io/v3/d1d56533f438474f9642a893faec90c0'
 );
 const web3 = new Web3(provider);
 
